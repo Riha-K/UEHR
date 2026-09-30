@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UEHR Form Generator — Project Interview Guide | Riha Sanjay Kokode</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0c10;--surface:#111318;--card:#161a22;--border:#232836;--text:#dde3f0;--muted:#6b7694;--bright:#fff;--blue:#5b9cf6;--gold:#f0b429;--green:#3ecf8e;--red:#f04e4e;--purple:#b57bee;--teal:#38d9d9;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Lora',Georgia,serif;font-size:15px;line-height:1.8;}
+.topbar{position:sticky;top:0;z-index:200;background:rgba(10,12,16,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+.topbar-inner{display:flex;align-items:center;padding:0 24px;overflow-x:auto;scrollbar-width:none;}
+.topbar-inner::-webkit-scrollbar{display:none;}
+.topbar-brand{font-family:'Syne',sans-serif;font-size:13px;font-weight:800;color:var(--gold);white-space:nowrap;padding:14px 20px 14px 0;border-right:1px solid var(--border);margin-right:12px;}
+.topbar a{display:block;padding:13px 12px;text-decoration:none;color:var(--muted);font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:.5px;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;text-transform:uppercase;}
+.topbar a:hover{color:var(--bright);border-color:var(--gold);}
+.hero{background:linear-gradient(135deg,#0a0c10 0%,#0d1119 40%,#101520 100%);padding:56px 48px 44px;border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
+.hero::after{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(91,156,246,.08) 0%,transparent 65%);pointer-events:none;}
+.hero-eyebrow{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(1.9rem,5vw,3.2rem);font-weight:800;color:var(--bright);line-height:1.05;}
+.hero h1 em{font-style:normal;color:var(--blue);}
+.hero-sub{margin-top:12px;color:var(--muted);font-size:14px;max-width:740px;}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;}
+.hero-tag{background:rgba(91,156,246,.1);border:1px solid rgba(91,156,246,.25);color:var(--blue);font-family:'Syne',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:20px;}
+.main{max-width:1000px;margin:0 auto;padding:0 28px 100px;}
+.section{padding-top:60px;}
+[id]{scroll-margin-top:54px;}
+.sec-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--gold);font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;}
+.sec-title{font-family:'Syne',sans-serif;font-size:1.75rem;font-weight:800;color:var(--bright);margin-bottom:6px;line-height:1.1;}
+.sec-intro{color:#a8b4cc;font-size:14.5px;line-height:1.85;margin-bottom:24px;max-width:820px;border-left:3px solid var(--border);padding-left:16px;}
+.sec-intro strong{color:var(--bright);}
+.concept-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
+.concept-grid.three-col{grid-template-columns:repeat(3,1fr);}
+@media(max-width:680px){.concept-grid,.concept-grid.three-col{grid-template-columns:1fr;}}
+.concept-card{background:var(--card);border:1px solid var(--border);border-top:3px solid var(--blue);border-radius:8px;padding:20px;}
+.concept-card.gold{border-top-color:var(--gold);}
+.concept-card.green{border-top-color:var(--green);}
+.concept-card.teal{border-top-color:var(--teal);}
+.concept-card.purple{border-top-color:var(--purple);}
+.concept-card.red{border-top-color:var(--red);}
+.concept-card h4{font-family:'Syne',sans-serif;font-size:12px;font-weight:800;color:var(--bright);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;}
+.concept-card p,.concept-card ul{color:#9daabf;font-size:13px;line-height:1.75;}
+.concept-card p+p{margin-top:8px;}
+.concept-card ul{list-style:none;}
+.concept-card ul li{padding:2px 0 2px 14px;position:relative;}
+.concept-card ul li::before{content:'›';position:absolute;left:0;color:var(--gold);}
+.concept-card strong{color:var(--bright);}
+.flow-container{display:flex;align-items:flex-start;flex-wrap:wrap;gap:6px;margin-bottom:24px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px;}
+.flow-step{flex:1;min-width:90px;background:rgba(91,156,246,.07);border:1px solid rgba(91,156,246,.2);border-radius:8px;padding:12px 8px;text-align:center;}
+.flow-icon{font-size:1.3rem;margin-bottom:5px;}
+.flow-name{font-family:'Syne',sans-serif;font-size:10px;font-weight:700;color:var(--bright);margin-bottom:3px;}
+.flow-desc{font-size:10px;color:var(--muted);line-height:1.4;}
+.flow-arrow{align-self:center;color:var(--gold);font-size:1.1rem;padding:0 4px;flex-shrink:0;}
+.code-block{background:#0d1117;border:1px solid var(--border);border-radius:6px;padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#79c0ff;margin-top:8px;overflow-x:auto;white-space:pre;}
+.comparison-table{overflow-x:auto;margin:14px 0;}
+.comparison-table table{width:100%;border-collapse:collapse;}
+.comparison-table th{background:rgba(91,156,246,.08);color:var(--blue);font-family:'Syne',sans-serif;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:9px 12px;text-align:left;border-bottom:1px solid var(--border);}
+.comparison-table td{padding:9px 12px;border-bottom:1px solid rgba(35,40,54,.5);font-size:12.5px;color:#9daabf;vertical-align:top;}
+.comparison-table tr:hover td{background:rgba(255,255,255,.02);}
+.comparison-table strong{color:var(--bright);}
+.qa-block{margin:14px 0;}
+.qa{margin-bottom:14px;}
+.q{background:rgba(240,180,41,.07);border:1px solid rgba(240,180,41,.2);border-radius:6px 6px 0 0;padding:11px 16px;font-family:'Syne',sans-serif;font-size:12.5px;font-weight:700;color:var(--gold);letter-spacing:.3px;}
+.a{background:var(--card);border:1px solid var(--border);border-top:none;border-radius:0 0 6px 6px;padding:13px 16px;font-size:13px;color:#9daabf;line-height:1.8;}
+.a strong{color:var(--green);}
+.script-box{background:rgba(91,156,246,.06);border:1px solid rgba(91,156,246,.2);border-left:4px solid var(--blue);border-radius:0 8px 8px 0;padding:18px 22px;margin:14px 0;font-size:14px;color:#c8d4e8;line-height:1.9;font-style:italic;}
+.script-box strong{color:var(--bright);font-style:normal;}
+.highlight-box{background:rgba(240,78,78,.05);border:1px solid rgba(240,78,78,.2);border-left:4px solid var(--red);border-radius:0 8px 8px 0;padding:14px 18px;margin:14px 0;font-size:13px;color:#c8a4a4;}
+.highlight-box strong{color:var(--bright);}
+.tip-box{background:rgba(62,207,142,.06);border:1px solid rgba(62,207,142,.2);border-left:4px solid var(--green);border-radius:0 8px 8px 0;padding:14px 18px;margin:14px 0;font-size:13px;color:#9dbfb0;}
+.tip-box strong{color:var(--bright);}
+.subsection{margin-bottom:28px;}
+.subsection h3{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:800;color:var(--bright);margin-bottom:10px;padding-bottom:7px;border-bottom:1px solid var(--border);}
+.scrolltop{position:fixed;bottom:24px;right:24px;background:var(--gold);color:#000;border:none;cursor:pointer;width:42px;height:42px;border-radius:50%;font-size:1.1rem;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.4);z-index:999;}
+.six-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0;}
+@media(max-width:720px){.six-grid{grid-template-columns:1fr;}}
+.six-item{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:14px 16px;}
+.six-item .n{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);font-weight:600;margin-bottom:4px;}
+.six-item h5{font-family:'Syne',sans-serif;font-size:12px;color:var(--bright);margin-bottom:6px;}
+.six-item p{font-size:12.5px;color:#9daabf;line-height:1.65;}
+.vflow{display:flex;flex-direction:column;align-items:center;gap:0;margin:18px 0 24px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:22px 18px;}
+.vflow-step{width:100%;max-width:740px;background:rgba(91,156,246,.07);border:1px solid rgba(91,156,246,.22);border-radius:8px;padding:14px 18px;}
+.vflow-step .vn{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);font-weight:600;margin-bottom:4px;}
+.vflow-step h5{font-family:'Syne',sans-serif;font-size:13px;color:var(--bright);margin-bottom:4px;}
+.vflow-step p{font-size:12.5px;color:#9daabf;line-height:1.65;margin:0;}
+.vflow-arrow{color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:14px;padding:6px 0;}
+.diagram-box{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px;margin:16px 0 22px;overflow-x:auto;}
+.diagram-box .caption{font-family:'Syne',sans-serif;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
+.diagram-box img{display:block;margin:0 auto;max-width:100%;height:auto;border-radius:6px;border:1px solid var(--border);background:#fff;}
+.fig-note{font-size:12px;color:var(--muted);margin-top:10px;text-align:center;}
+.mermaid{background:#0d1117;border:1px solid var(--border);border-radius:8px;padding:16px;margin:12px 0;}
+.phase-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0;}
+@media(max-width:720px){.phase-row{grid-template-columns:1fr;}}
+.phase{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px;}
+.phase h4{font-family:'Syne',sans-serif;font-size:13px;color:var(--bright);margin-bottom:8px;}
+.phase.pre{border-top:3px solid var(--blue);}
+.phase.post{border-top:3px solid var(--green);}
+.phase ul{list-style:none;color:#9daabf;font-size:13px;}
+.phase ul li{padding:3px 0 3px 14px;position:relative;}
+.phase ul li::before{content:'›';position:absolute;left:0;color:var(--gold);}
+</style>
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true, theme: 'dark', themeVariables: { primaryColor: '#1a2332', primaryTextColor: '#dde3f0', primaryBorderColor: '#5b9cf6', lineColor: '#f0b429', secondaryColor: '#161a22', tertiaryColor: '#0d1117', fontFamily: 'Lora, Georgia, serif' }});
+</script>
+</head>
+<body>
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-brand">UEHR GUIDE</div>
+    <a href="#pitch">Pitch</a>
+    <a href="#problem">Problem</a>
+    <a href="#concepts">Concepts</a>
+    <a href="#workflow">Workflow</a>
+    <a href="#modules">Modules</a>
+    <a href="#tech">Tech Why</a>
+    <a href="#stack">Stack</a>
+    <a href="#code">Code</a>
+    <a href="#qa">Q&amp;A</a>
+    <a href="#improve">Improve</a>
+    <a href="#quick">Quick Hits</a>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Project Interview Study Guide</div>
+  <h1>UEHR — Usability in EHR<br><em>Dynamic Multilingual Form Generator</em></h1>
+  <p class="hero-sub">Interview prep from the project report + codebase: openEHR archetypes, dynamic React forms, language neutrality, SNOMED CT / Snowstorm terminology binding, and MongoDB persistence — with full workflow diagrams.</p>
+  <div class="hero-tags">
+    <span class="hero-tag">openEHR</span>
+    <span class="hero-tag">Archetypes</span>
+    <span class="hero-tag">React</span>
+    <span class="hero-tag">Node.js</span>
+    <span class="hero-tag">MongoDB</span>
+    <span class="hero-tag">SNOMED CT</span>
+    <span class="hero-tag">Snowstorm</span>
+    <span class="hero-tag">Interoperability</span>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- 01 PITCH -->
+<div id="pitch" class="section">
+  <div class="sec-label">01</div>
+  <h2 class="sec-title">Project Elevator Pitch</h2>
+  <p class="sec-intro">Have a <strong>60–75 second</strong> answer ready. Then dive into modules if they ask.</p>
+
+  <div class="script-box">
+    “UEHR is a <strong>multilingual EHR form generator</strong>. Instead of hard-coding clinical forms, we generate them dynamically from <strong>openEHR archetypes</strong>. An archetype is serialized to JSON, and the React frontend reads that JSON to build the GUI — mapping datatypes like quantity, text, and coded text to input components. The form supports <strong>language neutrality</strong> using translations already present in the archetype (ISO 639-1 codes like en/ja). On submit, we call the local <strong>Snowstorm API</strong> to bind medical terms to <strong>SNOMED CT concept IDs</strong> for semantic interoperability, then persist the JSON payload in <strong>MongoDB</strong> through a Node/Express backend. So the system addresses syntactic interoperability via openEHR, semantic interoperability via SNOMED CT, and usability via dynamic multilingual forms.”
+  </div>
+
+  <div class="six-grid">
+    <div class="six-item"><div class="n">01</div><h5>Problem</h5><p>Static medical forms don’t scale; language barriers hurt usability; EHR exchange needs syntactic + semantic interoperability.</p></div>
+    <div class="six-item"><div class="n">02</div><h5>Architecture</h5><p>Archetype → JSON → React GUI → (language select) → Submit → Snowstorm SNOMED IDs → Node API → MongoDB.</p></div>
+    <div class="six-item"><div class="n">03</div><h5>Why these tools</h5><p>openEHR for structure; React for dynamic UI; MongoDB for flexible JSON clinical docs; Snowstorm for SNOMED binding.</p></div>
+    <div class="six-item"><div class="n">04</div><h5>What I can defend</h5><p>Form generation from JSON tree, LangSelector, recursive term binding, Express insertOne, interoperability definitions.</p></div>
+    <div class="six-item"><div class="n">05</div><h5>Challenges</h5><p>Datatype→widget mapping; multilingual labels; CORS/Nginx for Snowstorm; evolving archetype schemas.</p></div>
+    <div class="six-item"><div class="n">06</div><h5>Evaluation</h5><p>Forms generate for archetypes (e.g. blood pressure, health risk); language switch works; submissions land in MongoDB with termBindings.</p></div>
+  </div>
+</div>
+
+<!-- 02 PROBLEM -->
+<div id="problem" class="section">
+  <div class="sec-label">02</div>
+  <h2 class="sec-title">Problem &amp; Objectives</h2>
+  <p class="sec-intro">From the project report abstract — these four objectives are your interview backbone.</p>
+
+  <div class="concept-grid">
+    <div class="concept-card">
+      <h4>Why static forms fail</h4>
+      <p>Clinical needs change. If forms are hard-coded, adding a field means redesigning the whole UI and redeploying. Doctors/domain experts should drive structure via archetypes — not wait on developers for every field change.</p>
+    </div>
+    <div class="concept-card gold">
+      <h4>Four objectives</h4>
+      <ul>
+        <li>Generate medical forms <strong>dynamically</strong> from archetypes/templates</li>
+        <li>Provide <strong>language neutrality</strong> in the generated form</li>
+        <li><strong>Persist</strong> form data in a suitable database</li>
+        <li><strong>Terminology binding</strong> using SNOMED CT</li>
+      </ul>
+    </div>
+    <div class="concept-card green">
+      <h4>Motivation (India / usability)</h4>
+      <p>Language barriers in healthcare UIs reduce adoption. Multilingual forms improve usability in diverse populations. Standardization (openEHR + SNOMED) enables exchange without ambiguity.</p>
+    </div>
+    <div class="concept-card purple">
+      <h4>Novelty (report)</h4>
+      <p>Combination of (1) multilingual dynamic forms from archetypes, (2) SNOMED CT semantic binding, (3) MongoDB flexible persistence — not just one of these alone.</p>
+    </div>
+  </div>
+</div>
+
+<!-- 03 CONCEPTS -->
+<div id="concepts" class="section">
+  <div class="sec-label">03</div>
+  <h2 class="sec-title">Must-Know Concepts</h2>
+  <p class="sec-intro">If you only memorize definitions, memorize these. Interviewers will probe them.</p>
+
+  <div class="concept-grid">
+    <div class="concept-card">
+      <h4>EHR</h4>
+      <p>Electronic Health Record — digital patient medical information accessible to clinicians/systems.</p>
+    </div>
+    <div class="concept-card gold">
+      <h4>openEHR</h4>
+      <p>Open standard for EHR structure/content. Separates <strong>reference model</strong> (software) from <strong>clinical knowledge</strong> (archetypes/templates managed by clinicians).</p>
+    </div>
+    <div class="concept-card teal">
+      <h4>Archetype</h4>
+      <p>Reusable clinical model for a concept (e.g. Blood Pressure) with fields, constraints, datatypes, translations. Written in <strong>ADL</strong>, can be compiled to AOM and serialized to JSON.</p>
+    </div>
+    <div class="concept-card purple">
+      <h4>Syntactic interoperability</h4>
+      <p>Systems can <strong>exchange</strong> structured data using a shared format/model (here: openEHR archetypes / standardized structure).</p>
+    </div>
+    <div class="concept-card green">
+      <h4>Semantic interoperability</h4>
+      <p>Systems share <strong>meaning</strong> of terms. “Systolic BP” means the same concept everywhere — achieved via <strong>SNOMED CT IDs</strong>, not just translated labels.</p>
+    </div>
+    <div class="concept-card red">
+      <h4>SNOMED CT</h4>
+      <p>Huge multilingual clinical terminology. Concepts have IDs. Bound via local <strong>Snowstorm</strong> server API (<code>/snomed/MAIN/concepts?term=...</code>).</p>
+    </div>
+  </div>
+
+  <div class="tip-box"><strong>Interview one-liner:</strong> “openEHR gives us the structure (syntax); SNOMED CT gives us shared meaning (semantics); React+MongoDB give us usable multilingual capture and storage.”</div>
+</div>
+
+<!-- 04 WORKFLOW -->
+<div id="workflow" class="section">
+  <div class="sec-label">04</div>
+  <h2 class="sec-title">Full Workflow — Diagrams + Explanation</h2>
+  <p class="sec-intro">The report splits the system into <strong>pre-submit</strong> and <strong>post-submit</strong>. Learn both phases cold.</p>
+
+  <div class="phase-row">
+    <div class="phase pre">
+      <h4>Pre-submit</h4>
+      <ul>
+        <li>Dynamic Form Generation module</li>
+        <li>Language Neutrality module</li>
+        <li>User fills form in chosen language</li>
+      </ul>
+    </div>
+    <div class="phase post">
+      <h4>Post-submit</h4>
+      <ul>
+        <li>Terminology Binding (Snowstorm / SNOMED CT)</li>
+        <li>Data Persistence (Node → MongoDB)</li>
+        <li>Stored JSON includes concept IDs</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="diagram-box">
+    <div class="caption">Figure 3.1 — Overall flow (from project report)</div>
+    <img src="interview_assets/fig_3_1_overall_flow.png" alt="Overall flow of proposed UEHR system from project report">
+    <p class="fig-note">Source: Project_Report_UEHR11.pdf · Fig. 3.1 Overall flow of the proposed solution</p>
+  </div>
+
+  <div class="diagram-box">
+    <div class="caption">Figure 4.1 — Complete implementation diagram (from project report)</div>
+    <img src="interview_assets/fig_4_1_complete.png" alt="Complete implementation diagram of UEHR">
+    <p class="fig-note">Source: Project_Report_UEHR11.pdf · Fig. 4.1 Implementation diagram of the proposed system</p>
+  </div>
+
+  <div class="diagram-box">
+    <div class="caption">Interview flowchart (redrawn — practice drawing this)</div>
+    <pre class="mermaid">
+flowchart TB
+  AR["Archetype / Template<br/>ADL via Archetype Designer"] --> AOM["AWB Compiler → AOM"]
+  AOM --> JSON["Serialize to JSON<br/>fields · constraints · localizedNames"]
+  JSON --> GUI["React GUI Generator<br/>InputComp tree walk"]
+  GUI --> LANG["Language Neutrality<br/>ISO 639-1 dropdown"]
+  LANG --> FORM["Multilingual clinical form"]
+  FORM --> SUB["User Submit"]
+  SUB --> SNO["Snowstorm GET<br/>term → SNOMED conceptId"]
+  SNO --> PAY["JSON payload + termBindings"]
+  PAY --> API["Node/Express POST :5001"]
+  API --> MONGO[(MongoDB document store)]
+    </pre>
+  </div>
+
+  <div class="vflow">
+    <div class="vflow-step">
+      <div class="vn">STEP 01</div>
+      <h5>Obtain / design archetype</h5>
+      <p>Clinical concept (e.g. Blood Pressure) is modeled as an openEHR archetype/template (Archetype Designer / CKM). Contains attributes, constraints, datatypes, and translations.</p>
+    </div>
+    <div class="vflow-arrow">↓</div>
+    <div class="vflow-step">
+      <div class="vn">STEP 02</div>
+      <h5>Compile + serialize to JSON</h5>
+      <p>ADL → Archetype Object Model (via AWB) → JSON. JSON holds tree structure, inputs, <code>localizedNames</code>, optional termBindings, languages list.</p>
+    </div>
+    <div class="vflow-arrow">↓</div>
+    <div class="vflow-step">
+      <div class="vn">STEP 03</div>
+      <h5>Dynamic GUI generation (React)</h5>
+      <p>Frontend fetches <code>/{rmType}/{archetypeId}.json</code>, walks <code>archetype.tree.children</code>, and renders <code>InputComp</code> widgets based on datatype (DECIMAL / TEXT / CODED TEXT → number, text, dropdown).</p>
+    </div>
+    <div class="vflow-arrow">↓</div>
+    <div class="vflow-step">
+      <div class="vn">STEP 04</div>
+      <h5>Language neutrality</h5>
+      <p>User picks language from dropdown (<code>LangSelector</code>). Labels are taken from archetype translations / localized names for that ISO code (en, ja, it, …). Form regenerates labels without new hard-coded UI.</p>
+    </div>
+    <div class="vflow-arrow">↓</div>
+    <div class="vflow-step">
+      <div class="vn">STEP 05</div>
+      <h5>User fills + submits</h5>
+      <p>Patient fields + clinical fields collected. On submit, frontend recursively builds a filtered JSON of values (and empty branches pruned).</p>
+    </div>
+    <div class="vflow-arrow">↓</div>
+    <div class="vflow-step">
+      <div class="vn">STEP 06</div>
+      <h5>Terminology binding (SNOMED CT)</h5>
+      <p>For nodes without existing SNOMED bindings, call Snowstorm: <code>GET /snomed/MAIN/concepts?term=...</code>. Attach <code>termBindings["SNOMED-CT"] = conceptId</code> so meaning is language-independent.</p>
+    </div>
+    <div class="vflow-arrow">↓</div>
+    <div class="vflow-step">
+      <div class="vn">STEP 07</div>
+      <h5>Persist in MongoDB</h5>
+      <p><code>POST http://localhost:5001/</code> → Express <code>insertOne(req.body)</code> into MongoDB. Flexible document schema fits evolving archetypes (Observation, Composition, etc.).</p>
+    </div>
+  </div>
+
+  <div class="diagram-box">
+    <div class="caption">Runtime sequence — one form submission</div>
+    <pre class="mermaid">
+sequenceDiagram
+  participant U as User
+  participant R as React Form
+  participant S as Snowstorm
+  participant N as Node Express
+  participant M as MongoDB
+  U->>R: Select archetype + language
+  R->>R: Fetch JSON + render InputComp tree
+  U->>R: Fill fields + Submit
+  loop each medical term needing binding
+    R->>S: GET /snomed/MAIN/concepts?term=...
+    S-->>R: conceptId
+  end
+  R->>N: POST / JSON + termBindings
+  N->>M: insertOne(document)
+  M-->>N: ack
+  N-->>R: result
+  R-->>U: Form Submitted Successfully
+    </pre>
+  </div>
+
+  <div class="script-box">
+    “If you ask me to walk through the workflow: pre-submit we turn an openEHR archetype JSON into a multilingual React form; post-submit we bind terms to SNOMED CT IDs via Snowstorm and store the document in MongoDB. That gives us dynamic usability plus syntactic and semantic interoperability.”
+  </div>
+</div>
+
+<!-- 05 MODULES -->
+<div id="modules" class="section">
+  <div class="sec-label">05</div>
+  <h2 class="sec-title">Four Modules (Deep Dive)</h2>
+
+  <div class="subsection">
+    <h3>A. Dynamic GUI Generation</h3>
+    <div class="diagram-box">
+      <div class="caption">Figure 3.2 — GUI generation module (report)</div>
+      <img src="interview_assets/fig_3_2_gui_module.png" alt="GUI generation module implementation diagram">
+    </div>
+    <div class="concept-grid">
+      <div class="concept-card">
+        <h4>What it does</h4>
+        <p>Converts archetype JSON into a usable medical form. Traverses data attributes and creates inputs according to constraints.</p>
+      </div>
+      <div class="concept-card gold">
+        <h4>Datatype → widget mapping</h4>
+        <ul>
+          <li><strong>DECIMAL / Quantity</strong> → numeric input</li>
+          <li><strong>TEXT</strong> → text input</li>
+          <li><strong>CODED TEXT</strong> → dropdown of valid codes</li>
+        </ul>
+      </div>
+    </div>
+    <div class="qa-block">
+      <div class="qa">
+        <div class="q">Q: Why generate forms from archetypes instead of hard-coding?</div>
+        <div class="a">Archetypes change with clinical knowledge. Dynamic generation means a new/updated archetype JSON can produce a new form <strong>without rewriting React screens</strong> for every field.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>B. Language Neutrality</h3>
+    <div class="diagram-box">
+      <div class="caption">Figure 3.7 — Language neutrality module (report)</div>
+      <img src="interview_assets/fig_3_7_language.png" alt="Language neutrality component diagram">
+    </div>
+    <div class="qa-block">
+      <div class="qa">
+        <div class="q">Q: How does multilingual support work?</div>
+        <div class="a">Archetypes include translations (e.g. English + Japanese for “blood pressure”). JSON keeps them under localized names keyed by <strong>ISO 639-1</strong> codes (<code>en</code>, <code>ja</code>). The React <code>LangSelector</code> switches <code>ln</code> state; <code>InputComp</code> displays the label for the selected language.</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q: Is translating the UI enough for interoperability?</div>
+        <div class="a"><strong>No.</strong> Labels help humans (usability). Machines need stable concept IDs — that’s why we also do <strong>SNOMED CT binding</strong> after submit.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>C. Data Persistence (MongoDB)</h3>
+    <div class="diagram-box">
+      <div class="caption">Figure 3.8 — Data persistence module (report)</div>
+      <img src="interview_assets/fig_3_8_persistence.png" alt="Data persistence component diagram">
+    </div>
+    <div class="comparison-table">
+      <table>
+        <thead><tr><th>Why MongoDB</th><th>Explanation</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Native JSON/BSON</strong></td><td>Form payload is already a document tree</td></tr>
+          <tr><td><strong>Flexible schema</strong></td><td>Archetypes evolve; different RM types (Observation, etc.) differ in shape</td></tr>
+          <tr><td><strong>Scalability</strong></td><td>Handles growing volumes of health-record documents</td></tr>
+          <tr><td><strong>Simple backend</strong></td><td>Express <code>insertOne</code> is enough for MVP persistence</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="qa-block">
+      <div class="qa">
+        <div class="q">Q: Why not PostgreSQL / SQL?</div>
+        <div class="a">Possible, but you’d need frequent schema migrations as archetypes change, or heavy EAV/JSON columns anyway. MongoDB’s document model matches variable clinical form trees with less friction for this use case.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>D. Terminology Binding (SNOMED CT / Snowstorm)</h3>
+    <div class="diagram-box">
+      <div class="caption">Figure 3.11 — Terminology binding implementation (report)</div>
+      <img src="interview_assets/fig_3_11_terminology.png" alt="Terminology binding implementation diagram">
+    </div>
+    <div class="code-block">// From Form.jsx — Snowstorm lookup
+GET http://localhost/snomed/MAIN/concepts?term=fever&offset=0&limit=1
+→ response.items[0].conceptId
+→ termBindings["SNOMED-CT"] = conceptId</div>
+    <div class="qa-block">
+      <div class="qa">
+        <div class="q">Q: What problem does terminology binding solve?</div>
+        <div class="a">The same clinical idea can be written in many languages/spellings. Storing a <strong>SNOMED conceptId</strong> makes the record semantically comparable across systems and languages.</div>
+      </div>
+      <div class="qa">
+        <div class="q">Q: Why Snowstorm and not only FHIR Terminology API?</div>
+        <div class="a">Snowstorm is SNOMED’s terminology server; the project uses openEHR + local Snowstorm endpoints. FHIR API is an alternative; report chose Snowstorm for local hosting and concept search suited to our binding step.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 06 TECH WHY -->
+<div id="tech" class="section">
+  <div class="sec-label">06</div>
+  <h2 class="sec-title">Technologies — Why Exactly These?</h2>
+
+  <div class="comparison-table">
+    <table>
+      <thead><tr><th>Technology</th><th>Role</th><th>Why chosen</th><th>Why not / alternatives</th></tr></thead>
+      <tbody>
+        <tr><td><strong>openEHR archetypes</strong></td><td>Clinical model source</td><td>Standardized, clinician-maintainable, multilingual, interoperable structure</td><td>Hard-coded forms; ad-hoc hospital schemas without standard exchange</td></tr>
+        <tr><td><strong>JSON</strong></td><td>Interchange format</td><td>Natural web format; easy for React; stores in MongoDB directly</td><td>XML possible (common in healthcare) but heavier for this JS stack</td></tr>
+        <tr><td><strong>React</strong></td><td>Frontend</td><td>Component tree maps cleanly to archetype tree; fast dynamic UI</td><td>Static HTML forms; server-rendered only UIs harder for language switching</td></tr>
+        <tr><td><strong>Node.js + Express</strong></td><td>Backend API</td><td>Lightweight JSON POST → Mongo insert; same language family as frontend</td><td>Spring/Django heavier for this MVP persistence layer</td></tr>
+        <tr><td><strong>MongoDB</strong></td><td>Persistence</td><td>Schema flexibility for evolving archetypes; document = form submission</td><td>Strict SQL schema churn; Firebase couples to vendor; Redis not durable primary store</td></tr>
+        <tr><td><strong>SNOMED CT</strong></td><td>Semantics</td><td>Global clinical vocabulary; concept IDs for true semantic interoperability</td><td>Free-text only; ICD alone is classification-focused, not the same coverage</td></tr>
+        <tr><td><strong>Snowstorm + Elasticsearch</strong></td><td>Terminology server</td><td>Official/local SNOMED API; concept search by term</td><td>Remote-only terminology services; harder offline/demo control</td></tr>
+        <tr><td><strong>Nginx</strong></td><td>Proxy for Snowstorm</td><td>Route <code>/snomed</code>, help with CORS for browser calls</td><td>Calling Snowstorm cross-origin directly hits browser CORS issues</td></tr>
+        <tr><td><strong>Archetype Designer / AWB</strong></td><td>Authoring &amp; compile</td><td>Create/export archetypes; ADL→AOM→JSON path</td><td>Hand-writing JSON clinical models error-prone</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 07 STACK -->
+<div id="stack" class="section">
+  <div class="sec-label">07</div>
+  <h2 class="sec-title">Runtime Stack (Ports &amp; Components)</h2>
+
+  <div class="flow-container">
+    <div class="flow-step"><div class="flow-icon">⚛️</div><div class="flow-name">React</div><div class="flow-desc">localhost:3000</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-icon">🟢</div><div class="flow-name">Express</div><div class="flow-desc">localhost:5001</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-icon">🍃</div><div class="flow-name">MongoDB</div><div class="flow-desc">documents</div></div>
+  </div>
+  <div class="flow-container">
+    <div class="flow-step"><div class="flow-icon">📘</div><div class="flow-name">React Form</div><div class="flow-desc">on submit</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-icon">🌐</div><div class="flow-name">Nginx proxy</div><div class="flow-desc">/snomed</div></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><div class="flow-icon">❄️</div><div class="flow-name">Snowstorm</div><div class="flow-desc">+ Elasticsearch 7.1</div></div>
+  </div>
+
+  <div class="tip-box"><strong>Prerequisites from README:</strong> Java 11+, Maven, MongoDB, Node/npm, Nginx, Elasticsearch 7.1.0, Snowstorm jar + SNOMED release files.</div>
+</div>
+
+<!-- 08 CODE -->
+<div id="code" class="section">
+  <div class="sec-label">08</div>
+  <h2 class="sec-title">Code-Level Talking Points</h2>
+  <p class="sec-intro">Be ready for “show me what the code does” — based on <code>Form.jsx</code> and <code>backend/api.js</code>.</p>
+
+  <div class="concept-grid">
+    <div class="concept-card">
+      <h4>Form.jsx</h4>
+      <ul>
+        <li>Loads archetype JSON by route params <code>rmType</code>, <code>archetypeId</code></li>
+        <li>Adds patient_id / patient_name fields</li>
+        <li><code>LangSelector</code> sets <code>ln</code></li>
+        <li>Recursive <code>filterUtil</code> builds submission tree</li>
+        <li><code>getSnomedData</code> / <code>getTermBindings</code> attach concept IDs</li>
+        <li><code>axios.post('http://localhost:5001/', data)</code></li>
+      </ul>
+    </div>
+    <div class="concept-card green">
+      <h4>backend/api.js</h4>
+      <ul>
+        <li>Express app, CORS enabled</li>
+        <li><code>POST /</code> → <code>insertOne(req.body)</code></li>
+        <li>Port <strong>5001</strong></li>
+        <li>Minimal API focused on persistence</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="highlight-box"><strong>Honest interview note:</strong> Backend is intentionally thin (insert). Most intelligence is in the frontend form pipeline + Snowstorm integration. If asked how you’d productionize: auth, validation, audit logs, FHIR export, retry/queue for terminology calls, server-side binding.</div>
+</div>
+
+<!-- 09 QA -->
+<div id="qa" class="section">
+  <div class="sec-label">09</div>
+  <h2 class="sec-title">Interview Q&amp;A Bank</h2>
+
+  <div class="qa-block">
+    <div class="qa">
+      <div class="q">Q: Explain UEHR in one minute.</div>
+      <div class="a">Use the elevator pitch. End with the three pillars: dynamic forms, multilingual usability, SNOMED + MongoDB interoperability/persistence.</div>
+    </div>
+    <div class="qa">
+      <div class="q">Q: What is an archetype? Give an example.</div>
+      <div class="a">A reusable clinical information model. Example: <strong>Blood Pressure</strong> archetype with systolic, diastolic, mean arterial pressure, interpretations, protocol/state sections — plus translations and constraints.</div>
+    </div>
+    <div class="qa">
+      <div class="q">Q: Syntactic vs semantic interoperability?</div>
+      <div class="a"><strong>Syntactic:</strong> shared structure/format so systems can exchange data (openEHR). <strong>Semantic:</strong> shared meaning of concepts (SNOMED CT IDs), so “fever” in any language maps to the same concept.</div>
+    </div>
+    <div class="qa">
+      <div class="q">Q: How is the form generated dynamically?</div>
+      <div class="a">Archetype JSON is fetched; React recursively renders children with <code>InputComp</code>; widget type comes from archetype datatype/constraints — not a fixed HTML form per disease.</div>
+    </div>
+    <div class="qa">
+      <div class="q">Q: How do you support Japanese / Italian forms?</div>
+      <div class="a">Translations already exist in the archetype/JSON localized names. User selects language code; UI reads that language’s labels. No separate hard-coded Japanese React page.</div>
+    </div>
+    <div class="qa">
+      <div class="q">Q: What happens on Submit?</div>
+      <div class="a">Build filtered JSON of entered values → resolve SNOMED IDs via Snowstorm for terms → POST to Express → <code>insertOne</code> into MongoDB → success alert / navigate home.</div>
+    </div>
+    <div class="qa">
+      <div class="q">Q: Why MongoDB over MySQL?</div>
+      <div class="a">Clinical form trees vary by archetype and evolve over time. Document DB avoids constant relational migrations and stores JSON naturally.</div>
+    </div>
+    <div class="qa">
+      <div class="q">Q: What is Snowstorm?</div>
+      <div class="a">A SNOMED CT terminology server (with Elasticsearch) exposing REST APIs to search concepts and fetch concept IDs — used for terminology binding.</div>
+    </div>
+    <div class="qa">
+      <div class="q">Q: openEHR vs HL7 FHIR?</div>
+      <div class="a">Both are major health-interop approaches. openEHR emphasizes archetypes/dual-model clinical content; FHIR emphasizes resource-based APIs for exchange. This project is <strong>openEHR-centered</strong> with SNOMED for semantics; FHIR could complement for API exchange.</div>
+    </div>
+    <div class="qa">
+      <div class="q">Q: What challenges did you face?</div>
+      <div class="a">Mapping diverse archetype datatypes to UI widgets; ensuring translations render correctly; integrating local Snowstorm (Elasticsearch + Nginx CORS); designing persistence that survives archetype changes.</div>
+    </div>
+    <div class="qa">
+      <div class="q">Q: How did you evaluate success?</div>
+      <div class="a">Generated forms for multiple archetypes (blood pressure, health risk, etc.); verified language switching; verified MongoDB documents contain submitted values and SNOMED termBindings.</div>
+    </div>
+    <div class="qa">
+      <div class="q">Q: What was YOUR contribution / what can you claim?</div>
+      <div class="a">Be honest about team context if asked. On your resume you list UEHR with React/Node, openEHR dynamic forms, SNOMED via Snowstorm, MongoDB. Defend architecture, interoperability concepts, and code paths you understand end-to-end.</div>
+    </div>
+    <div class="qa">
+      <div class="q">Q: How does this relate to an AI / document role (e.g. ARC)?</div>
+      <div class="a">UEHR turns structured clinical knowledge models into usable digital capture with standard codes — similar spirit to digitizing documents into AI-ready, interoperable assets. Experience with APIs, JSON pipelines, and semantic coding transfers to document intelligence systems.</div>
+    </div>
+    <div class="qa">
+      <div class="q">Q: Security / privacy concerns?</div>
+      <div class="a">Health data is sensitive (PHI). Production needs authN/Z, encryption, audit logs, consent, and compliance (e.g. HIPAA-like controls). Current project is an academic usability/interop prototype, not a production hospital system.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 10 IMPROVE -->
+<div id="improve" class="section">
+  <div class="sec-label">10</div>
+  <h2 class="sec-title">How Would You Improve It?</h2>
+  <div class="concept-grid">
+    <div class="concept-card">
+      <h4>Product / UX</h4>
+      <ul>
+        <li>Remove optional fields to reduce clutter (report mentions this)</li>
+        <li>Better validation messages per constraint</li>
+        <li>Offline/poor-network handling</li>
+      </ul>
+    </div>
+    <div class="concept-card gold">
+      <h4>Engineering</h4>
+      <ul>
+        <li>Move SNOMED binding server-side</li>
+        <li>Auth, RBAC, audit trail</li>
+        <li>Input validation + rate limiting</li>
+        <li>Tests for datatype mapping</li>
+      </ul>
+    </div>
+    <div class="concept-card teal">
+      <h4>Interoperability</h4>
+      <ul>
+        <li>Export FHIR resources</li>
+        <li>Stronger use of archetype termBindings when present</li>
+        <li>CKM sync for archetype updates</li>
+      </ul>
+    </div>
+    <div class="concept-card purple">
+      <h4>AI stretch (bonus)</h4>
+      <ul>
+        <li>Suggest SNOMED codes with ranking UI</li>
+        <li>NLP assist for free-text → coded entries</li>
+        <li>RAG over clinical guidelines beside the form</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- 11 QUICK -->
+<div id="quick" class="section">
+  <div class="sec-label">11</div>
+  <h2 class="sec-title">Quick-Hit Definitions</h2>
+  <div class="qa-block">
+    <div class="qa"><div class="q">Q: What is ADL?</div><div class="a">Archetype Definition Language — textual language for defining openEHR archetypes.</div></div>
+    <div class="qa"><div class="q">Q: What is AOM?</div><div class="a">Archetype Object Model — object representation after compiling ADL; can be serialized to JSON.</div></div>
+    <div class="qa"><div class="q">Q: What is CKM?</div><div class="a">Clinical Knowledge Manager — online repository of archetypes/templates/term sets.</div></div>
+    <div class="qa"><div class="q">Q: What is ISO 639-1?</div><div class="a">Two-letter language codes (<code>en</code>, <code>ja</code>, <code>it</code>) used to tag archetype translations and the language dropdown.</div></div>
+    <div class="qa"><div class="q">Q: What is RM type?</div><div class="a">Reference Model type in openEHR (e.g. OBSERVATION) — used in routing/loading the correct archetype JSON.</div></div>
+    <div class="qa"><div class="q">Q: Usability in this project means?</div><div class="a">Clinicians/patients can use forms in their language; forms adapt from archetypes without constant developer redesign.</div></div>
+  </div>
+
+  <div class="highlight-box">
+    <strong>Day-before checklist:</strong> (1) Recite pitch. (2) Draw pre-submit vs post-submit. (3) Define syntactic vs semantic interoperability. (4) Explain archetype → JSON → React → Snowstorm → MongoDB. (5) Defend MongoDB + SNOMED + React choices. (6) Name one improvement for production healthcare.
+  </div>
+</div>
+
+</div>
+<button class="scrolltop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+</body>
+</html>
