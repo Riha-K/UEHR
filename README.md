@@ -1,6 +1,6 @@
 # UEHR Form Generator
 
-Clinical form builder for an EHR. Forms can be created in more than one language, saved in MongoDB, bound to SNOMED CT through Snowstorm, and shaped with openEHR archetypes.
+Clinical form builder for an EHR. Forms can be created in more than one language, saved in MongoDB, bound to SNOMED CT through Snowstorm, and shaped with openEHR archetypes. The React UI stores submissions through an Express API.
 
 ## What runs here
 
