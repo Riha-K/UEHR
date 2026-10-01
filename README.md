@@ -10,6 +10,8 @@ Clinical form builder for an EHR. Forms can be created in more than one language
 | Express API | `backend/` | port 5001, stores submissions in MongoDB |
 | SNOMED search | Snowstorm + Elasticsearch 7.1 | proxied by Nginx |
 
+The openEHR archetypes the form builder reads live in `public/`: `Archetypes.json` plus the `Action`, `Cluster`, `Composition`, `Evaluation`, `Instruction`, and `Observation` folders. React components are in `src/components/`, where `Form.jsx` handles language selection and SNOMED binding.
+
 ## Prerequisites
 
 - Java 11 or newer, and Maven 3, for Snowstorm
