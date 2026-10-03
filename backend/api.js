@@ -8,6 +8,10 @@ const port = 5001
 
 app.post('/',async (req,resp)=>{
   try {
+    if (!req.body || Object.keys(req.body).length === 0) {
+      resp.status(400).send('Empty form');
+      return;
+    }
     let data = await dbConnect();
     console.log('You are inside post /');
     let result = await data.insertOne(req.body);

@@ -36,11 +36,19 @@ export default function Main({
           return Archetypes.json();
         })
         .then((Archetypes) => {
-          setAvailableRmTypes(Object.keys(Archetypes));
-          setRmType(Object.keys(Archetypes)[0]);
-          setAvailableArchetypes(Archetypes[Object.keys(Archetypes)[0]]);
-          setArchetypeId(Archetypes[Object.keys(Archetypes)[0]][0]);
+          const keys = Object.keys(Archetypes || {});
+          if (keys.length === 0) {
+            throw new Error("no archetypes");
+          }
+          setAvailableRmTypes(keys);
+          setRmType(keys[0]);
+          setAvailableArchetypes(Archetypes[keys[0]]);
+          setArchetypeId(Archetypes[keys[0]][0]);
           setAllArchetypes({ ...Archetypes });
+        })
+        .catch((error) => {
+          console.log(error);
+          alert("Could not load archetypes");
         });
     }
     fetchAvailableArchetypes();
