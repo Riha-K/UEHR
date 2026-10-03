@@ -7,10 +7,15 @@ app.use(express.json());
 const port = 5001
 
 app.post('/',async (req,resp)=>{
-  let data = await dbConnect();
-  console.log('You are inside post /');
-  let result = await data.insertOne(req.body);
-  resp.send(result);
+  try {
+    let data = await dbConnect();
+    console.log('You are inside post /');
+    let result = await data.insertOne(req.body);
+    resp.send(result);
+  } catch (error) {
+    console.error(error);
+    resp.status(500).send('Internal Server Error');
+  }
 })
 
 
