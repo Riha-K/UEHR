@@ -11,7 +11,7 @@ export default function Selector({  value, onValueChangeHandler, options, enable
       disabled = {!enabled && enabled !== undefined}
       aria-label="Default select example"
     >
-      {options.map((option) => {
+      {(options ?? []).map((option) => {
         return (
           <option key={option} value={option}>
             {option}
@@ -32,7 +32,7 @@ export function LangSelector({  value, onValueChangeHandler, options }) {
       onChange={onValueChangeHandler}
       aria-label="Default select example"
     >
-      {options.map((option) => {
+      {(options ?? []).map((option) => {
         return (
           <option key={option} value={option}>
             {ISO6391.getName(option) ? ISO6391.getName(option) : option}

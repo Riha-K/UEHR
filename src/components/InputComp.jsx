@@ -3,7 +3,7 @@ import Selector from "./Selector";
 
 
 function Plaintext({input, value, setValue, enabled}) {
-  input.value = ""
+  input.value = value
 
   async function onValueChangeHandler(e) {
     await setValue(e.target.value);
@@ -43,7 +43,7 @@ function CodedText({ ln, input, value, setValue, enabled }) {
 }
 
 function DateTime({input, value, setValue, enabled}) {
-  input.value = ""
+  input.value = value
   async function onValueChangeHandler(e) {
     await setValue(e.target.value);
     input.value = e.target.value;

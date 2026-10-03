@@ -31,6 +31,7 @@ export default function Form({archetype, setArchetype, archetypeLoaded, setArche
     })
     .catch((error) => {
       console.log(error);
+      return {};
     });
     }
 
@@ -41,7 +42,7 @@ export default function Form({archetype, setArchetype, archetypeLoaded, setArche
   return getSnomedData(node)
   .then(snomedData => {
     let termBindings = {};
-    if (Object.keys(snomedData).length !== 0) {
+    if (snomedData && Object.keys(snomedData).length !== 0) {
       termBindings["SNOMED-CT"] = snomedData.conceptId;
     }
     return termBindings;
@@ -97,10 +98,13 @@ export default function Form({archetype, setArchetype, archetypeLoaded, setArche
 
   function handleFileSubmission(e) {
     filter(archetype).then((data) => {
-      axios.post("http://localhost:5001/", data)
-      console.alert(data)
+      return axios.post("http://localhost:5001/", data)
+    }).then(() => {
       alert("Form Submitted Successfully")
       navigate("/")
+    }).catch((error) => {
+      console.log(error);
+      alert("Form could not be submitted")
     })
   }
 
