@@ -1,2 +1,2 @@
-const dbConnect = require('./mongodb')
+require('./api')
 
