@@ -17,9 +17,9 @@ function App() {
     <>
     <Router>
       <Routes>
-        <Route exact path="/" element={<Main key = "FileUploadPage"  archetypeLoaded = {archetypeLoaded} setArchetypeLoaded = {setArchetypeLoaded} archetype={archetype} setArchetype = {setArchetype}/>}></Route>
-        <Route exact path="/archetype/:rmType/:archetypeId" element={<Form key = "Archetype" archetypeLoaded = {archetypeLoaded} setArchetypeLoaded = {setArchetypeLoaded} archetype={archetype} setArchetype = {setArchetype}/>}></Route>
-        <Route exact path="/archetype/:rmType/:archetypeId/submission" element={<Submission key = "Submission" archetypeLoaded = {archetypeLoaded} setArchetypeLoaded = {setArchetypeLoaded} archetype={archetype} setArchetype = {setArchetype}/>}></Route>
+        <Route path="/" element={<Main key = "FileUploadPage"  archetypeLoaded = {archetypeLoaded} setArchetypeLoaded = {setArchetypeLoaded} archetype={archetype} setArchetype = {setArchetype}/>}></Route>
+        <Route path="/archetype/:rmType/:archetypeId" element={<Form key = "Archetype" archetypeLoaded = {archetypeLoaded} setArchetypeLoaded = {setArchetypeLoaded} archetype={archetype} setArchetype = {setArchetype}/>}></Route>
+        <Route path="/archetype/:rmType/:archetypeId/submission" element={<Submission key = "Submission" archetypeLoaded = {archetypeLoaded} setArchetypeLoaded = {setArchetypeLoaded} archetype={archetype} setArchetype = {setArchetype}/>}></Route>
       </Routes>
     </Router>
     </>
