@@ -29,7 +29,7 @@ npm install
 npm start
 ```
 
-Backend:
+Backend, start this before submitting a form:
 
 ```bash
 cd backend
