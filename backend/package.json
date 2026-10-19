@@ -1,7 +1,7 @@
 {
   "name": "uehrbackend",
   "version": "1.0.0",
-  "description": "Backend service for UEHR to store form data in mongoDB",
+  "description": "Backend service for UEHR to store form data in MongoDB",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
