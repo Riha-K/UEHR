@@ -4,6 +4,26 @@ import { useNavigate, useParams } from "react-router-dom";
 import InputComp from "./InputComp";
 import {LangSelector} from "./Selector";
 
+/**
+ * Form — render one openEHR archetype as an editable clinical form.
+ *
+ * Route params:
+ *   rmType, archetypeId  — which archetype JSON under public/ to bind
+ *
+ * Props (lifted from App):
+ *   archetype / setArchetype           — parsed tree shared with Submission
+ *   archetypeLoaded / setArchetypeLoaded
+ *
+ * Behaviour overview:
+ *   1. Load archetype structure for the route (if not already loaded).
+ *   2. Walk nodes to attach SNOMED-CT term bindings via Snowstorm
+ *      (GET http://localhost/snomed/MAIN/concepts) when bindings are missing.
+ *   3. Let the user pick UI language (LangSelector) and fill InputComp fields.
+ *   4. Navigate to .../submission when the form is ready to review.
+ *
+ * Ownership note: this React form UI is the part I own. Express + Mongo
+ * persistence for submissions lives under backend/ (teammate).
+ */
 
 export default function Form({archetype, setArchetype, archetypeLoaded, setArchetypeLoaded}) {
   const [ln, setLanguage] = useState("en")
