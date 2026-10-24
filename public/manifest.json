@@ -1,6 +1,6 @@
 {
   "short_name": "UEHR",
-  "name": "UEHR form generator",
+  "name": "UEHR openEHR form generator",
   "icons": [
     {
       "src": "favicon.ico",
