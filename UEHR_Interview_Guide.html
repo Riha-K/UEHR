@@ -584,7 +584,11 @@ GET http://localhost/snomed/MAIN/concepts?term=fever&offset=0&limit=1
     </div>
     <div class="qa">
       <div class="q">Q: What was YOUR contribution / what can you claim?</div>
-      <div class="a">Be honest about team context if asked. On your resume you list UEHR with React/Node, openEHR dynamic forms, SNOMED via Snowstorm, MongoDB. Defend architecture, interoperability concepts, and code paths you understand end-to-end.</div>
+      <div class="a">Team project — be explicit. <strong>My side:</strong> React form generation from archetype JSON (<code>Form.jsx</code> / related UI), language switching, and SNOMED CT binding via Snowstorm on submit. <strong>Teammate side:</strong> Express/Node API and MongoDB persistence. On your resume you list UEHR with React/Node, openEHR dynamic forms, SNOMED via Snowstorm, MongoDB — defend the paths you own and the full architecture you understand end-to-end.</div>
+    </div>
+    <div class="qa">
+      <div class="q">Q: Which archetypes / RM types does the catalog cover?</div>
+      <div class="a">Beyond the usual Blood Pressure / health-risk examples: the <code>public/</code> catalog spans multiple openEHR RM types (Action, Evaluation, Observation, Composition, Instruction, Admin, etc.) with forms such as ECG, Spirometry, Medication Order, alcohol/menstruation summaries, and more — loaded dynamically from archetype JSON, not hard-coded one-off screens.</div>
     </div>
     <div class="qa">
       <div class="q">Q: How does this relate to an AI / document role (e.g. ARC)?</div>
